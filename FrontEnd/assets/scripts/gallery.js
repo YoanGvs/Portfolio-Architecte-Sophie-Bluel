@@ -1,5 +1,6 @@
 export function displayWorks(works) {
   const galleryElement = document.querySelector(".gallery");
+  // Reset avant rendu : évite que les images s'empilent à chaque re-render (filtres)
   galleryElement.innerHTML = "";
   works.forEach((work) => {
     const figure = document.createElement("figure");
