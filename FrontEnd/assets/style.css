@@ -220,6 +220,14 @@ li:hover {
 	font-size: 0.9em;
 }
 
+/* Message d'erreur d'authentification (vide par défaut, rempli en JS) */
+.login-error {
+	margin-top: 1em;
+	text-align: center;
+	color: #C0392B;
+	font-weight: 600;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
