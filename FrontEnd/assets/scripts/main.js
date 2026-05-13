@@ -1,6 +1,13 @@
 import { WorksApi } from "./WorksApi.js";
+import { CategoriesApi } from "./CategoriesApi.js";
 import { displayWorks } from "./gallery.js";
+import { displayFilters } from "./filters.js";
+
 const works = new WorksApi("http://localhost:5678/api/works");
+const categories = new CategoriesApi("http://localhost:5678/api/categories");
+
 const actualWorks = await works.getAll();
-console.log(actualWorks);
+const actualCategories = await categories.getAll();
+
 displayWorks(actualWorks);
+displayFilters(actualCategories, actualWorks);
