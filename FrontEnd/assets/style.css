@@ -392,3 +392,133 @@ footer nav ul {
 	font-size: 14px;
 }
 
+/* ========== Modale vue "ajout" (étape 3.3) ========== */
+
+/* data-active-view pilote l'affichage : symétrique avec aria-hidden de la modale */
+.modal-view { display: none; }
+.modal[data-active-view="gallery"] .modal-view[data-view="gallery"],
+.modal[data-active-view="add"] .modal-view[data-view="add"] {
+	display: block;
+}
+
+.modal-back {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background: none;
+	border: none;
+	font-size: 1.2em;
+	cursor: pointer;
+	color: #000;
+}
+
+.add-form {
+	display: flex;
+	flex-direction: column;
+	max-width: 420px;
+	margin: 0 auto;
+}
+
+/* Zone de drop visuel : le label clique l'input file caché */
+.upload-zone {
+	background-color: #E8F1F6;
+	height: 170px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+	position: relative;
+	overflow: hidden;
+}
+
+.upload-icon {
+	font-size: 4em;
+	color: #B9C5CC;
+	margin-bottom: 10px;
+}
+
+.upload-label {
+	background-color: #CBD6DC;
+	color: #306685;
+	padding: 8px 18px;
+	border-radius: 30px;
+	cursor: pointer;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.upload-hint {
+	color: #444;
+	font-size: 0.8em;
+	margin: 0;
+}
+
+.upload-preview {
+	display: none;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	background-color: white;
+}
+
+/* État "image choisie" : on cache l'invitation, on montre la preview */
+.upload-zone.has-image .upload-icon,
+.upload-zone.has-image .upload-label,
+.upload-zone.has-image .upload-hint {
+	display: none;
+}
+.upload-zone.has-image .upload-preview {
+	display: block;
+}
+
+.add-form label {
+	font-family: 'Work Sans';
+	font-weight: 500;
+	margin: 10px 0 6px;
+}
+
+.add-form input[type="text"],
+.add-form select {
+	height: 50px;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 0 10px;
+	font-size: 1em;
+	font-family: inherit;
+}
+
+.add-form select {
+	appearance: none;
+	background-color: white;
+}
+
+.add-form hr {
+	border: none;
+	border-top: 1px solid #B3B3B3;
+	margin: 30px 0;
+}
+
+.add-submit {
+	align-self: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	padding: 12px 50px;
+	border: none;
+	border-radius: 60px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+/* Pseudo-classe :disabled native — pas besoin de classe maison */
+.add-submit:disabled {
+	background-color: #A7A7A7;
+	cursor: not-allowed;
+}
+

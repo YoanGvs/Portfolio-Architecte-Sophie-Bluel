@@ -17,4 +17,14 @@ export class WorksApi {
     });
     return response.ok;
   }
+
+  async create(formData, token) {
+    // POST multipart : ne PAS définir Content-Type, FormData gère le boundary
+    const response = await fetch(this.url, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+    return { ok: response.ok, data: await response.json() };
+  }
 }

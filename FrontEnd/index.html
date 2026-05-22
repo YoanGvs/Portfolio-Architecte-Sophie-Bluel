@@ -86,6 +86,7 @@
     </footer>
 
     <!-- Modale d'édition (étape 3) : cachée par défaut via aria-hidden + CSS -->
+    <!-- data-active-view bascule entre la vue 'gallery' (3.1/3.2) et la vue 'add' (3.3) -->
     <aside
       id="modal"
       class="modal"
@@ -93,17 +94,54 @@
       aria-modal="true"
       aria-labelledby="modal-title"
       aria-hidden="true"
+      data-active-view="gallery"
     >
       <div class="modal-wrapper">
         <button class="modal-close" aria-label="Fermer la modale">
           <i class="fa-solid fa-xmark"></i>
         </button>
-        <h2 id="modal-title">Galerie photo</h2>
-        <div class="modal-gallery">
-          <!-- Vignettes générées dynamiquement par modal.js -->
-        </div>
-        <hr />
-        <button class="modal-add-btn">Ajouter une photo</button>
+
+        <!-- Vue 1 : galerie + bouton "Ajouter une photo" -->
+        <section class="modal-view" data-view="gallery">
+          <h2 id="modal-title">Galerie photo</h2>
+          <div class="modal-gallery">
+            <!-- Vignettes générées dynamiquement par modal.js -->
+          </div>
+          <hr />
+          <button class="modal-add-btn">Ajouter une photo</button>
+        </section>
+
+        <!-- Vue 2 : formulaire d'ajout (étape 3.3) -->
+        <section class="modal-view" data-view="add">
+          <button class="modal-back" aria-label="Retour à la galerie">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <h2>Ajout photo</h2>
+          <form class="add-form" novalidate>
+            <!-- Zone d'upload : label = clic ouvre le file picker (input caché) -->
+            <div class="upload-zone">
+              <i class="fa-regular fa-image upload-icon"></i>
+              <label for="add-file" class="upload-label">+ Ajouter photo</label>
+              <input
+                type="file"
+                id="add-file"
+                accept="image/png, image/jpeg"
+                hidden
+              />
+              <p class="upload-hint">jpg, png : 4mo max</p>
+              <img class="upload-preview" alt="" />
+            </div>
+            <label for="add-title">Titre</label>
+            <input type="text" id="add-title" required />
+            <label for="add-category">Catégorie</label>
+            <select id="add-category" required>
+              <option value=""></option>
+              <!-- Options chargées dynamiquement depuis l'API -->
+            </select>
+            <hr />
+            <button type="submit" class="add-submit" disabled>Valider</button>
+          </form>
+        </section>
       </div>
     </aside>
   </body>
