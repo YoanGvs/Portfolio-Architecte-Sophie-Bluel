@@ -228,6 +228,47 @@ li:hover {
 	font-weight: 600;
 }
 
+/* ========== Mode admin ========== */
+
+/* Bande noire en haut, pleine largeur (sort du max-width du body via margins négatives) */
+.edit-mode-banner {
+	background-color: black;
+	color: white;
+	text-align: center;
+	padding: 1em;
+	margin: 0 calc(50% - 50vw);
+	font-size: 1em;
+}
+.edit-mode-banner i {
+	margin-right: 0.5em;
+}
+
+/* Wrapper "Mes projets + modifier" (créé en JS uniquement en mode admin) */
+.portfolio-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 30px;
+	margin-bottom: 1em;
+}
+.portfolio-header h2 {
+	margin-bottom: 0;
+}
+
+.edit-btn {
+	color: #000;
+	font-size: 0.9em;
+	text-decoration: none;
+}
+.edit-btn i {
+	margin-right: 0.4em;
+}
+
+/* Filtres masqués en mode admin */
+body.is-admin .filters {
+	display: none;
+}
+
 input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;

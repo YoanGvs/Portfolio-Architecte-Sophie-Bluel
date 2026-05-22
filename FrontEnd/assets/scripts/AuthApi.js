@@ -9,7 +9,7 @@ export class AuthApi {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    // fetch ne throw pas sur 4xx/5xx → on expose response.ok au caller
+
     return { ok: response.ok, data: await response.json() };
   }
 }
