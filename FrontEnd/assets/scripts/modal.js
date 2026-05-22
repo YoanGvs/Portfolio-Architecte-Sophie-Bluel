@@ -139,14 +139,27 @@ addForm.addEventListener("submit", async (event) => {
   const { ok, data } = await worksApi.create(formData, token);
 
   if (ok) {
-    // Refresh modale via re-fetch (3.3) — la galerie publique reste obsolète, 3.4 résoudra ça
-    loadModalGallery();
+    // Ajout dynamique ciblé dans les 2 galeries (3.4) — pas de re-fetch
+    addWorkToGalleries(data);
     resetForm();
     switchView("gallery");
   } else {
     alert("Erreur lors de l'ajout du projet");
   }
 });
+
+// Ajoute la nouvelle vignette dans la modale ET dans la galerie publique sans reload
+function addWorkToGalleries(work) {
+  modalGallery.appendChild(createModalFigure(work));
+
+  const publicFigure = document.createElement("figure");
+  publicFigure.dataset.id = work.id;
+  publicFigure.innerHTML = `
+    <img src="${work.imageUrl}" alt="${work.title}">
+    <figcaption>${work.title}</figcaption>
+  `;
+  document.querySelector(".gallery").appendChild(publicFigure);
+}
 
 function resetForm() {
   addForm.reset();
