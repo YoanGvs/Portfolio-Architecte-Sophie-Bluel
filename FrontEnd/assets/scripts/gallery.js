@@ -4,6 +4,8 @@ export function displayWorks(works) {
   galleryElement.innerHTML = "";
   works.forEach((work) => {
     const figure = document.createElement("figure");
+    // data-id : pont avec la galerie modale pour retrait DOM ciblé après DELETE
+    figure.dataset.id = work.id;
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
 

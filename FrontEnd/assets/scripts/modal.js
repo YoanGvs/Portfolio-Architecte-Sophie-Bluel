@@ -30,6 +30,26 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+// Event delegation : un seul listener sur le conteneur gère TOUS les boutons poubelle,
+// y compris ceux ajoutés après le chargement (re-fetch à chaque ouverture)
+modalGallery.addEventListener("click", async (event) => {
+  const deleteBtn = event.target.closest(".modal-delete");
+  if (!deleteBtn) return;
+
+  const figure = deleteBtn.closest(".modal-figure");
+  const id = figure.dataset.id;
+  const token = sessionStorage.getItem("token");
+
+  const ok = await worksApi.delete(id, token);
+  if (ok) {
+    figure.remove();
+    // Retire la même figure dans la galerie publique sans re-fetch (le data-id fait le pont)
+    document.querySelector(`.gallery figure[data-id="${id}"]`)?.remove();
+  } else {
+    alert("Erreur lors de la suppression");
+  }
+});
+
 async function loadModalGallery() {
   const works = await worksApi.getAll();
   modalGallery.innerHTML = "";
