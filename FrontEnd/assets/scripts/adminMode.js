@@ -1,3 +1,5 @@
+import { openModal } from "./modal.js";
+
 export function initAdminMode() {
   const token = sessionStorage.getItem("token");
   // Pas de token → mode public, rien à modifier
@@ -38,7 +40,10 @@ function insertEditButton() {
   editBtn.className = "edit-btn";
   editBtn.href = "#";
   editBtn.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> modifier`;
-  // Placeholder : la modale (étape 3.1) prendra le relais sur le clic
+  editBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    openModal();
+  });
 
   h2.parentNode.insertBefore(wrapper, h2);
   wrapper.appendChild(h2);

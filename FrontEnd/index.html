@@ -84,6 +84,28 @@
         </ul>
       </nav>
     </footer>
+
+    <!-- Modale d'édition (étape 3) : cachée par défaut via aria-hidden + CSS -->
+    <aside
+      id="modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-hidden="true"
+    >
+      <div class="modal-wrapper">
+        <button class="modal-close" aria-label="Fermer la modale">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 id="modal-title">Galerie photo</h2>
+        <div class="modal-gallery">
+          <!-- Vignettes générées dynamiquement par modal.js -->
+        </div>
+        <hr />
+        <button class="modal-add-btn">Ajouter une photo</button>
+      </div>
+    </aside>
   </body>
   <script type="module" src="./assets/scripts/main.js"></script>
 </html>
