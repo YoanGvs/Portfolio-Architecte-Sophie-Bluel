@@ -10,7 +10,6 @@ export class WorksApi {
   }
 
   async delete(id, token) {
-    // DELETE /works/{id} → 204 No Content si OK, donc on ne parse pas le body
     const response = await fetch(`${this.url}/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
@@ -19,7 +18,6 @@ export class WorksApi {
   }
 
   async create(formData, token) {
-    // POST multipart : ne PAS définir Content-Type, FormData gère le boundary
     const response = await fetch(this.url, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },

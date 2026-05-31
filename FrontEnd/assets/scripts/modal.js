@@ -17,7 +17,6 @@ const uploadPreview = modal.querySelector(".upload-preview");
 const worksApi = new WorksApi("http://localhost:5678/api/works");
 const categoriesApi = new CategoriesApi("http://localhost:5678/api/categories");
 
-// La liste des catégories ne change pas — on la charge une fois et on garde le flag
 let categoriesLoaded = false;
 
 export function openModal() {
@@ -37,8 +36,6 @@ function switchView(name) {
   }
 }
 
-// ----- Fermeture (croix / backdrop / Escape) -----
-
 modal.addEventListener("click", (event) => {
   if (event.target === modal) closeModal();
 });
@@ -51,12 +48,8 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-// ----- Navigation entre les 2 vues -----
-
 addBtn.addEventListener("click", () => switchView("add"));
 backBtn.addEventListener("click", () => switchView("gallery"));
-
-// ----- Vue galerie : chargement + delete (event delegation) -----
 
 modalGallery.addEventListener("click", async (event) => {
   const deleteBtn = event.target.closest(".modal-delete");
@@ -94,8 +87,6 @@ function createModalFigure(work) {
   return figure;
 }
 
-// ----- Vue ajout : catégories, preview, validation, submit -----
-
 async function loadCategories() {
   const categories = await categoriesApi.getAll();
   categories.forEach((cat) => {
@@ -110,7 +101,6 @@ async function loadCategories() {
 fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
   if (!file) return;
-  // URL.createObjectURL : URL blob locale, pas d'upload — purement front pour preview
   uploadPreview.src = URL.createObjectURL(file);
   uploadZone.classList.add("has-image");
   updateSubmitState();
@@ -139,7 +129,6 @@ addForm.addEventListener("submit", async (event) => {
   const { ok, data } = await worksApi.create(formData, token);
 
   if (ok) {
-    // Ajout dynamique ciblé dans les 2 galeries (3.4) — pas de re-fetch
     addWorkToGalleries(data);
     resetForm();
     switchView("gallery");
@@ -148,7 +137,6 @@ addForm.addEventListener("submit", async (event) => {
   }
 });
 
-// Ajoute la nouvelle vignette dans la modale ET dans la galerie publique sans reload
 function addWorkToGalleries(work) {
   modalGallery.appendChild(createModalFigure(work));
 
